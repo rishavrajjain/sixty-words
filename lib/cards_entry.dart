@@ -24,12 +24,19 @@ class _CardEntryState extends State<CardEntry> {
     super.initState();
     final fbm = FirebaseMessaging.instance;
     fbm.requestPermission();
+    FirebaseMessaging.onBackgroundMessage((message) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => ThankyouCard('onBackgrooundApp')));
+      print(message);
+      return;
+    });
     FirebaseMessaging.onMessage.listen((message) {
       print(message);
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => ThankyouCard('onMessage')));
       return;
     });
+
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       Navigator.push(
           context,
