@@ -1,4 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:sixty_words/thankyou.dart';
 import 'home.dart';
 import 'news_bloc.dart';
 import 'shimmer.dart';
@@ -19,6 +22,22 @@ class _CardEntryState extends State<CardEntry> {
   @override
   void initState() {
     super.initState();
+    final fbm = FirebaseMessaging.instance;
+    fbm.requestPermission();
+    FirebaseMessaging.onMessage.listen((message) {
+      print(message);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => ThankyouCard('onMessage')));
+      return;
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => ThankyouCard('onMessageOpenedApp')));
+      print(message);
+      return;
+    });
     print("I AM BEING CALEED");
     newsBloc.getData();
     //cardList = _getMatchCard();
