@@ -89,9 +89,8 @@ class NewsBloc implements BaseBloc {
 
       var jsonData = jsonDecode(response.body);
       print('H1');
-      if (jsonData.isEmpty || jsonData.length<20) {
+      if (jsonData.isEmpty || jsonData.length < 20) {
         print('Thankyouuu');
-        
       }
       for (var u in jsonData) {
         news = News(
@@ -109,6 +108,43 @@ class NewsBloc implements BaseBloc {
         newsBloc.allMyPosts.add(news);
         print(newsBloc.allMyPosts.length);
       }
+    } catch (e) {
+      print(e);
+    }
+    if (showLoader) {
+      loadingController.add(false);
+    }
+  }
+
+  Future<void> getSingleData({String newsId, bool showLoader = true}) async {
+    if (showLoader) {
+      loadingController.add(true);
+    }
+    try {
+      print('R0');
+
+      var response = await http.get(Uri.https(
+        'news-app-us.herokuapp.com',
+        '/api/news/$newsId',
+      ));
+      print('R3');
+      print(response.body);
+      var jsonData = jsonDecode(response.body);
+      print('R1');
+      news = News(
+        tags: jsonData["tags"],
+        id: jsonData["id"],
+        title: jsonData["title"],
+        content: jsonData["content"],
+        author: jsonData["author"],
+        image: jsonData["image"],
+        url: jsonData["url"],
+        createdAt: jsonData["createdAt"],
+        updatedAt: jsonData["updatedAt"],
+      );
+      print('GROOO');
+      newsBloc.allMyPosts[0] = news;
+      print(newsBloc.allMyPosts.length);
     } catch (e) {
       print(e);
     }

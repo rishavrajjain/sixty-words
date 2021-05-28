@@ -25,24 +25,24 @@ class _CardEntryState extends State<CardEntry> {
     final fbm = FirebaseMessaging.instance;
     fbm.requestPermission();
     FirebaseMessaging.onBackgroundMessage((message) {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (_) => ThankyouCard('onBackgrooundApp')));
+      print('onBackgroundMessage');
+      newsBloc.getSingleData(newsId: message.data['newsId'].toString());
+      Navigator.push(context, MaterialPageRoute(builder: (_) => CardEntry()));
       print(message);
       return;
     });
     FirebaseMessaging.onMessage.listen((message) {
+      print('onMessage');
+      newsBloc.getSingleData(newsId: message.data['newsId'].toString());
       print(message);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (_) => ThankyouCard('onMessage')));
+      Navigator.push(context, MaterialPageRoute(builder: (_) => CardEntry()));
       return;
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => ThankyouCard('onMessageOpenedApp')));
-      print(message);
+      print('onMessageOpenedApp');
+      newsBloc.getSingleData(newsId: message.data['newsId'].toString());
+      Navigator.push(context, MaterialPageRoute(builder: (_) => CardEntry()));
       return;
     });
     print("I AM BEING CALEED");
