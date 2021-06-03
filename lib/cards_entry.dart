@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share/share.dart';
 import 'home.dart';
 import 'news_bloc.dart';
 import 'shimmer.dart';
@@ -11,6 +16,7 @@ class CardEntry extends StatefulWidget {
 }
 
 class _CardEntryState extends State<CardEntry> {
+  final screenshotController = ScreenshotController();
   static GlobalKey previewContainer = new GlobalKey();
   @override
   void initState() {
@@ -72,7 +78,8 @@ class _CardEntryState extends State<CardEntry> {
             // Navigator.push(context,
             //     MaterialPageRoute(builder: (_) => ClassListScreen()));
             // return Container();
-            return RepaintBoundary(
+            return Screenshot(
+              controller: screenshotController,
               child: MyHomePage(),
               key: previewContainer,
             );
@@ -84,6 +91,10 @@ class _CardEntryState extends State<CardEntry> {
   }
 
   takeScreenShot() async {
-   
+    final uint8List = await screenshotController.capture();
+    String tempPath = (await getTemporaryDirectory()).path;
+    File file = File('$tempPath/image.png');
+    await file.writeAsBytes(uint8List);
+    await Share.shareFiles([file.path],text: 'Download FinTicks App today for faster news');
   }
 }

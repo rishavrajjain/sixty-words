@@ -30,10 +30,10 @@ dependencies:
   http: ^0.13.3
   path_provider: ^2.0.2
   rxdart: ^0.27.1
+  screenshot: ^0.3.0
+  share: ^2.0.4
   shimmer: ^2.0.0
   url_launcher: ^6.0.6
-
-  # The following adds the Cupertino Icons font to your application.
 
 dev_dependencies:
   flutter_test:
@@ -41,7 +41,6 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
 flutter:
   # The following line ensures that the Material Icons font is
@@ -53,13 +52,10 @@ flutter:
   assets:
     - images/img3.jpg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
