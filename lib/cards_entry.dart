@@ -44,6 +44,7 @@ class _CardEntryState extends State<CardEntry> {
       Navigator.push(context, MaterialPageRoute(builder: (_) => CardEntry()));
       return;
     });
+    getToken();
     print("I AM BEING CALEED");
     newsBloc.getData();
     //cardList = _getMatchCard();
@@ -95,6 +96,13 @@ class _CardEntryState extends State<CardEntry> {
     String tempPath = (await getTemporaryDirectory()).path;
     File file = File('$tempPath/image.png');
     await file.writeAsBytes(uint8List);
-    await Share.shareFiles([file.path],text: 'Download FinTicks App today for faster news');
+    await Share.shareFiles([file.path],
+        text: 'Download FinTicks App today for faster news');
+  }
+
+  getToken() async {
+    String token = await FirebaseMessaging.instance.getToken();
+    print('the token');
+    print(token);
   }
 }
