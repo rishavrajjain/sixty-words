@@ -30,35 +30,31 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     print("HEYYYY");
-    return RepaintBoundary(
-      key: previewContainer,
-      child: PageView.builder(
-        pageSnapping: true,
-        scrollDirection: Axis.vertical,
-        controller: controller,
-        itemBuilder: (BuildContext context, int index) {
-          print('KKKK');
-          print(index);
-          print(newsBloc.allMyPosts.length);
-          if (index < newsBloc.allMyPosts.length - 1) {
-            if (index == newsBloc.allMyPosts.length - 3) {
-              newsBloc.skip = newsBloc.skip + 20;
-              newsBloc.getData(skip: newsBloc.skip, showLoader: false);
-            }
-            return Container(
-              height: MediaQuery.of(context).size.height - 80,
-              child: NewsCard(
-                index: index,
-              ),
-            );
+    return PageView.builder(
+      pageSnapping: true,
+      scrollDirection: Axis.vertical,
+      controller: controller,
+      itemBuilder: (BuildContext context, int index) {
+        print('KKKK');
+        print(index);
+        print(newsBloc.allMyPosts.length);
+        if (index < newsBloc.allMyPosts.length - 1) {
+          if (index == newsBloc.allMyPosts.length - 3) {
+            newsBloc.skip = newsBloc.skip + 20;
+            newsBloc.getData(skip: newsBloc.skip, showLoader: false);
           }
-          return Container();
-        },
-      ),
+          return Container(
+            height: MediaQuery.of(context).size.height - 80,
+            child: NewsCard(
+              index: index,
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
 
-  takeScreenShot() async {}
 
   void undoDeletion(index, item) {
     setState(() {
