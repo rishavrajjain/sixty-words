@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ThankyouCard extends StatelessWidget {
-  String title;
+  final String title;
   ThankyouCard(this.title);
   @override
   Widget build(BuildContext context) {

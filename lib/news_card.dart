@@ -5,7 +5,7 @@ import 'news.model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsCard extends StatefulWidget {
-  int index;
+  final int index;
   NewsCard({this.index});
   @override
   _NewsCardState createState() => _NewsCardState();

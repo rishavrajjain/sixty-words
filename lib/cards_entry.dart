@@ -1,16 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:sixty_words/thankyou.dart';
 import 'home.dart';
 import 'news_bloc.dart';
 import 'shimmer.dart';
-//import 'package:google_fonts/google_fonts.dart';
-import 'dart:typed_data';
-import 'dart:ui' as ui;
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:esys_flutter_share/esys_flutter_share.dart';
 
 class CardEntry extends StatefulWidget {
   @override
@@ -84,19 +77,13 @@ class _CardEntryState extends State<CardEntry> {
               key: previewContainer,
             );
           }
+          return Container();
         },
       ),
     );
   }
 
   takeScreenShot() async {
-    RenderRepaintBoundary boundary =
-        previewContainer.currentContext.findRenderObject();
-    ui.Image image = await boundary.toImage();
-    ByteData byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    Uint8List pngBytes = byteData.buffer.asUint8List();
-    await Share.file(
-        'newsshorts image', 'newsshorts.png', pngBytes, 'image/png',
-        text: 'Download the app now.');
+   
   }
 }
